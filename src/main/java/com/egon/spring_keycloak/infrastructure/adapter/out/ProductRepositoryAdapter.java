@@ -1,20 +1,33 @@
 package com.egon.spring_keycloak.infrastructure.adapter.out;
 
 import com.egon.spring_keycloak.application.port.out.FindAllProductPort;
+import com.egon.spring_keycloak.application.port.out.FindProductByIdPort;
+import com.egon.spring_keycloak.application.port.out.SaveProductPort;
 import com.egon.spring_keycloak.domain.entity.Product;
 import com.egon.spring_keycloak.infrastructure.jpa.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class ProductRepositoryAdapter implements FindAllProductPort {
+public class ProductRepositoryAdapter implements FindAllProductPort, FindProductByIdPort, SaveProductPort {
   private final ProductJpaRepository repository;
 
   @Override
   public List<Product> findAll() {
     return repository.findAll();
+  }
+
+  @Override
+  public Optional<Product> findById(String id) {
+    return repository.findById(id);
+  }
+
+  @Override
+  public void save(Product product) {
+    repository.save(product);
   }
 }
