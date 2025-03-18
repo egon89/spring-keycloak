@@ -11,7 +11,7 @@ public class FindProductDefaultStrategy implements FindProductUseCaseStrategy {
 
   @Override
   public boolean supports(UserDto user) {
-    return false;
+    return true;
   }
 
   @Override

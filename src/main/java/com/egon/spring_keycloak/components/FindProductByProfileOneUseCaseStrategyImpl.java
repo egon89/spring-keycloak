@@ -11,7 +11,7 @@ public class FindProductByProfileOneUseCaseStrategyImpl implements FindProductUs
 
   @Override
   public boolean supports(UserDto user) {
-    return false;
+    return "p1".equalsIgnoreCase(user.profile());
   }
 
   @Override
