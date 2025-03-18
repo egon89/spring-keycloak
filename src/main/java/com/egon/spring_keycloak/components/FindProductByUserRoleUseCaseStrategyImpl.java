@@ -3,19 +3,19 @@ package com.egon.spring_keycloak.components;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FindProductByProfileOneUseCaseStrategyImpl implements FindProductUseCaseStrategy {
+public class FindProductByUserRoleUseCaseStrategyImpl implements FindProductUseCaseStrategy {
   @Override
   public String execute() {
-    return "findProductByProfileOneUseCaseStrategyImpl";
+    return "findProductByUserRoleUseCaseStrategyImpl";
   }
 
   @Override
   public boolean supports(UserDto user) {
-    return "p1".equalsIgnoreCase(user.profile());
+    return user.subRoles().contains("ROLE_USER");
   }
 
   @Override
   public String getBeanName() {
-    return "findProductByProfileOneUseCaseStrategyImpl";
+    return "findProductByUserRoleUseCaseStrategyImpl";
   }
 }

@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Primary
 @Component
-public class FindProductDefaultStrategy implements FindProductUseCaseStrategy {
+public class FindProductDefaultUseCaseStrategyImpl implements FindProductUseCaseStrategy {
   @Override
   public String execute() {
-    return "findProductDefaultStrategy";
+    return "findProductDefaultUseCaseStrategyImpl";
   }
 
   @Override
@@ -18,7 +18,7 @@ public class FindProductDefaultStrategy implements FindProductUseCaseStrategy {
 
   @Override
   public String getBeanName() {
-    return "findProductDefaultStrategy";
+    return "findProductDefaultUseCaseStrategyImpl";
   }
 }
 

@@ -21,6 +21,7 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping("/strategy")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<String> get() {
         return ResponseEntity.ok(service.execute());
     }
