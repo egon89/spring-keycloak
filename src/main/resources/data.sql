@@ -1,0 +1,2 @@
+insert into products (id, name, price, available) values ('40087e5e-15b7-4b7d-b6f7-307f94006cbc', 'Product 1', 100, true);
+insert into products (id, name, price, available) values ('16281c72-b79a-48cd-8d5d-ac8887cea592', 'Product 2', 200, false);
