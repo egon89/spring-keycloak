@@ -1,5 +1,6 @@
 package com.egon.spring_keycloak.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.egon.spring_keycloak.services.ProductService;
@@ -22,8 +23,13 @@ public class ProductController {
 
     @GetMapping("/strategy")
 //    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public ResponseEntity<String> get() {
-        return ResponseEntity.ok(service.execute());
+    public ResponseEntity<String> findProduct() {
+        return ResponseEntity.ok(service.find());
+    }
+
+    @PostMapping("/strategy")
+    public ResponseEntity<String> createProductStrategy() {
+        return ResponseEntity.ok(service.create(BigDecimal.TEN));
     }
 
     @GetMapping
