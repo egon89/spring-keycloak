@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +17,7 @@ public class ProductServiceImpl implements ProductService {
   private final FindProductUseCaseSelector findProductUseCaseSelector;
   private final CreateProductUseCaseSelector createProductUseCaseSelector;
 
-  public FindProductOutputDto find() {
-    // TODO: move to controller?
+  public List<FindProductOutputDto> find() {
     final var useCase = findProductUseCaseSelector.getUseCaseStrategy();
 
     return useCase.execute();

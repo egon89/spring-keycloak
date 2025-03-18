@@ -15,8 +15,6 @@ public abstract class BaseUseCaseStrategySelector<T extends UserRoleBeanStrategy
   public abstract T getDefaultUseCase();
 
   public T getUseCaseStrategy() {
-    System.out.println(strategies);
-
     return strategies.stream()
         .filter(strategy -> strategy.supports(getUser()))
         .findFirst()

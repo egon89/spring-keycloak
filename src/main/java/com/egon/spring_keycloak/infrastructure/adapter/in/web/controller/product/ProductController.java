@@ -1,7 +1,8 @@
 package com.egon.spring_keycloak.infrastructure.adapter.in.web.controller.product;
 
 import com.egon.spring_keycloak.application.dto.product.FindProductOutputDto;
-import com.egon.spring_keycloak.application.service.product.ProductService;
+import com.egon.spring_keycloak.application.selector.product.CreateProductUseCaseSelector;
+import com.egon.spring_keycloak.application.selector.product.FindProductUseCaseSelector;
 import com.egon.spring_keycloak.infrastructure.adapter.in.web.controller.product.dto.ProductResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService service;
+    private final FindProductUseCaseSelector findProductUseCaseSelector;
+    private final CreateProductUseCaseSelector createProductUseCaseSelector;
 
     @GetMapping("/strategy")
 //    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public ResponseEntity<FindProductOutputDto> findProduct() {
-        return ResponseEntity.ok(service.find());
+    public ResponseEntity<List<FindProductOutputDto>> findAll() {
+        return ResponseEntity.ok(findProductUseCaseSelector.getUseCaseStrategy().execute());
     }
 
     @PostMapping("/strategy")
     public ResponseEntity<String> createProductStrategy() {
-        return ResponseEntity.ok(service.create(BigDecimal.TEN));
+        return ResponseEntity.ok(createProductUseCaseSelector.getUseCaseStrategy().execute(BigDecimal.TEN));
     }
 
     @GetMapping
