@@ -1,12 +1,14 @@
 package com.egon.spring_keycloak.components;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component("findProcessDefaultStrategy")
+@Primary
+@Component
 public class FindProductDefaultStrategy implements FindProductUseCaseStrategy {
   @Override
   public String execute() {
-    return "FindProcessDefaultStrategy";
+    return "findProductDefaultStrategy";
   }
 
   @Override
@@ -16,7 +18,7 @@ public class FindProductDefaultStrategy implements FindProductUseCaseStrategy {
 
   @Override
   public String getBeanName() {
-    return "findProcessDefaultStrategy";
+    return "findProductDefaultStrategy";
   }
 }
 

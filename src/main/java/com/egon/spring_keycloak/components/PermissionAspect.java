@@ -7,6 +7,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,13 @@ public class PermissionAspect {
 
     CheckPermission annotation = method.getAnnotation(CheckPermission.class);
     Class<? extends FindProductUseCaseStrategy> strategyClass = annotation.strategy();
+    String profile = annotation.profile();
+    Object target = joinPoint.getTarget();
 
     Map<String, ? extends FindProductUseCaseStrategy> strategies = applicationContext.getBeansOfType(strategyClass);
+    System.out.println(strategies);
 
-    final var user = new UserDto("p1", List.of("sr1"));
+    final var user = new UserDto(profile, List.of("sr1"));
 
     // Find the matching strategy
     FindProductUseCaseStrategy selectedStrategy = strategies.values().stream()
@@ -45,6 +49,18 @@ public class PermissionAspect {
     String selectedBeanName = selectedStrategy.getBeanName();
 
     System.out.printf("selectedBeanName %s%n", selectedBeanName);
+
+    FindProductUseCaseStrategy strategyBean =
+        applicationContext.getBean(selectedBeanName, FindProductUseCaseStrategy.class);
+
+    // Inject the selected strategy into the service
+    for (Field field : target.getClass().getDeclaredFields()) {
+      if (FindProductUseCaseStrategy.class.isAssignableFrom(field.getType())) {
+        field.setAccessible(true);
+        field.set(target, strategyBean);
+        break;
+      }
+    }
 
     Object proceed = joinPoint.proceed();
 

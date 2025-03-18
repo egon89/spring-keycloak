@@ -2,11 +2,11 @@ package com.egon.spring_keycloak.components;
 
 import org.springframework.stereotype.Component;
 
-@Component("findProcessByProfileOneUseCaseStrategyImpl")
+@Component
 public class FindProductByProfileOneUseCaseStrategyImpl implements FindProductUseCaseStrategy {
   @Override
   public String execute() {
-    return "FindProcessByProfileOneUseCaseStrategyImpl";
+    return "findProductByProfileOneUseCaseStrategyImpl";
   }
 
   @Override
@@ -16,6 +16,6 @@ public class FindProductByProfileOneUseCaseStrategyImpl implements FindProductUs
 
   @Override
   public String getBeanName() {
-    return "findProcessByProfileOneUseCaseStrategyImpl";
+    return "findProductByProfileOneUseCaseStrategyImpl";
   }
 }

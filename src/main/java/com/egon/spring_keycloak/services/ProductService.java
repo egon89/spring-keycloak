@@ -15,7 +15,8 @@ public class ProductService {
 
   private final FindProductUseCaseStrategy findProductUseCaseStrategy;
 
-  public ProductService(@Qualifier("findProcessDefaultStrategy") FindProductUseCaseStrategy findProductUseCaseStrategy) {
+//  public ProductService(@Qualifier("findProcessDefaultStrategy") FindProductUseCaseStrategy findProductUseCaseStrategy) {
+  public ProductService(FindProductUseCaseStrategy findProductUseCaseStrategy) {
     this.findProductUseCaseStrategy = findProductUseCaseStrategy;
   }
 
