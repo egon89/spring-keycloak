@@ -1,8 +1,7 @@
 package com.egon.spring_keycloak.services;
 
-import com.egon.spring_keycloak.components.CheckPermission;
-import com.egon.spring_keycloak.components.CreateProductUseCaseStrategy;
-import com.egon.spring_keycloak.components.FindProductUseCaseStrategy;
+import com.egon.spring_keycloak.components.CreateProductUseCaseSelector;
+import com.egon.spring_keycloak.components.FindProductUseCaseSelector;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +11,18 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class ProductService {
 
-  private final FindProductUseCaseStrategy findProductUseCaseStrategy;
-  private final CreateProductUseCaseStrategy createProductUseCaseStrategy;
+  private final FindProductUseCaseSelector findProductUseCaseSelector;
+  private final CreateProductUseCaseSelector createProductUseCaseSelector;
 
-  @CheckPermission(strategy = FindProductUseCaseStrategy.class)
   public String find() {
-    return findProductUseCaseStrategy.execute();
+    final var useCase = findProductUseCaseSelector.getUseCaseStrategy();
+
+    return useCase.execute();
   }
 
-  @CheckPermission(strategy = CreateProductUseCaseStrategy.class)
   public String create(BigDecimal value) {
-    return createProductUseCaseStrategy.execute(value);
+    final var useCase = createProductUseCaseSelector.getUseCaseStrategy();
+
+    return useCase.execute(value);
   }
 }

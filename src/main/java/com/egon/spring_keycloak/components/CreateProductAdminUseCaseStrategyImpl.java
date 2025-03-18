@@ -15,9 +15,4 @@ public class CreateProductAdminUseCaseStrategyImpl implements CreateProductUseCa
   public boolean supports(UserDto user) {
     return user.subRoles().contains("ROLE_ADMIN");
   }
-
-  @Override
-  public String getBeanName() {
-    return "createProductAdminUseCaseStrategyImpl";
-  }
 }

@@ -1,11 +1,9 @@
 package com.egon.spring_keycloak.components;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-@Primary
 @Component
 public class CreateProductDefaultUseCaseStrategyImpl implements CreateProductUseCaseStrategy {
   @Override
@@ -15,11 +13,6 @@ public class CreateProductDefaultUseCaseStrategyImpl implements CreateProductUse
 
   @Override
   public boolean supports(UserDto user) {
-    return true;
-  }
-
-  @Override
-  public String getBeanName() {
-    return "createProductDefaultUseCaseStrategyImpl";
+    return false;
   }
 }

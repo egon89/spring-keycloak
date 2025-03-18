@@ -13,9 +13,4 @@ public class FindProductByAdminRoleUseCaseStrategyImpl implements FindProductUse
   public boolean supports(UserDto user) {
     return user.subRoles().contains("ROLE_ADMIN");
   }
-
-  @Override
-  public String getBeanName() {
-    return "findProductByAdminRoleUseCaseStrategyImpl";
-  }
 }
