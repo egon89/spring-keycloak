@@ -39,11 +39,11 @@ public class PermissionAspect {
 
     CheckPermission annotation = method.getAnnotation(CheckPermission.class);
 
-    Class<? extends FindProductUseCaseStrategy> strategyClass = annotation.strategy();
+    Class<? extends UserRoleBeanStrategy> strategyClass = annotation.strategy();
 
     Object target = joinPoint.getTarget();
 
-    Map<String, ? extends FindProductUseCaseStrategy> strategies = applicationContext.getBeansOfType(strategyClass);
+    Map<String, ? extends UserRoleBeanStrategy> strategies = applicationContext.getBeansOfType(strategyClass);
 
     System.out.println(strategies);
 
@@ -53,7 +53,7 @@ public class PermissionAspect {
     final var user = new UserDto(getRoles(authentication));
 
     // Find the matching strategy
-    FindProductUseCaseStrategy selectedStrategy = strategies.values().stream()
+    final var selectedStrategy = strategies.values().stream()
         .filter(strategy -> strategy.supports(user))
         .findFirst()
         .orElseThrow(() -> new IllegalArgumentException("No suitable strategy found"));
@@ -63,11 +63,11 @@ public class PermissionAspect {
 
     System.out.printf("selectedBeanName %s%n", selectedBeanName);
 
-    FindProductUseCaseStrategy strategyBean =
-        applicationContext.getBean(selectedBeanName, FindProductUseCaseStrategy.class);
+    final var strategyBean =
+        applicationContext.getBean(selectedBeanName, strategyClass);
 
     // Inject the selected strategy into the service
-    setUpStrategyBean(target, strategyBean);
+    setUpStrategyBean(target, strategyClass, strategyBean);
 
     Object proceed = joinPoint.proceed();
 
@@ -78,12 +78,13 @@ public class PermissionAspect {
     return proceed;
   }
 
-  private static void setUpStrategyBean(Object target, FindProductUseCaseStrategy strategyBean) throws IllegalAccessException {
+  private static void setUpStrategyBean(
+      Object target, Class<? extends UserRoleBeanStrategy> strategyClass, UserRoleBeanStrategy strategyBean) throws IllegalAccessException {
     for (Field field : target.getClass().getDeclaredFields()) {
-      if (FindProductUseCaseStrategy.class.isAssignableFrom(field.getType())) {
+      if (strategyClass.isAssignableFrom(field.getType())) {
         field.setAccessible(true);
         field.set(target, strategyBean);
-        break;
+        System.out.printf("set strategy bean %s using %s class%n", strategyBean, strategyClass);
       }
     }
   }

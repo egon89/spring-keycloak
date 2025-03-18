@@ -1,7 +1,5 @@
 package com.egon.spring_keycloak.components;
 
-public interface FindProductUseCaseStrategy {
+public interface FindProductUseCaseStrategy extends UserRoleBeanStrategy {
   String execute();
-  boolean supports(UserDto user);
-  String getBeanName();
 }
