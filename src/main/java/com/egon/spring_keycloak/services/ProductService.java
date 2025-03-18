@@ -2,6 +2,7 @@ package com.egon.spring_keycloak.services;
 
 import com.egon.spring_keycloak.components.CreateProductUseCaseSelector;
 import com.egon.spring_keycloak.components.FindProductUseCaseSelector;
+import com.egon.spring_keycloak.controllers.dtos.FindProductOutputDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,8 @@ public class ProductService {
   private final FindProductUseCaseSelector findProductUseCaseSelector;
   private final CreateProductUseCaseSelector createProductUseCaseSelector;
 
-  public String find() {
+  public FindProductOutputDto find() {
+    // TODO: move to controller?
     final var useCase = findProductUseCaseSelector.getUseCaseStrategy();
 
     return useCase.execute();

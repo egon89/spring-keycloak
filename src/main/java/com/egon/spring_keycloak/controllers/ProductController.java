@@ -3,6 +3,7 @@ package com.egon.spring_keycloak.controllers;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.egon.spring_keycloak.controllers.dtos.FindProductOutputDto;
 import com.egon.spring_keycloak.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class ProductController {
 
     @GetMapping("/strategy")
 //    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public ResponseEntity<String> findProduct() {
+    public ResponseEntity<FindProductOutputDto> findProduct() {
         return ResponseEntity.ok(service.find());
     }
 

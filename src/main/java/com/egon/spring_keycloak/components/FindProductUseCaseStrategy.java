@@ -1,5 +1,7 @@
 package com.egon.spring_keycloak.components;
 
+import com.egon.spring_keycloak.controllers.dtos.FindProductOutputDto;
+
 public interface FindProductUseCaseStrategy extends UserRoleBeanStrategy {
-  String execute();
+  FindProductOutputDto execute();
 }
