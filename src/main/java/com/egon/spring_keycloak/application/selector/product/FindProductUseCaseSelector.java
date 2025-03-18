@@ -1,8 +1,8 @@
 package com.egon.spring_keycloak.application.selector.product;
 
 import com.egon.spring_keycloak.application.port.out.UserRolePort;
-import com.egon.spring_keycloak.application.usecase.product.find.FindAllProductUseCaseStrategy;
-import com.egon.spring_keycloak.application.usecase.product.find.impl.FindAllProductDefaultUseCaseStrategyImpl;
+import com.egon.spring_keycloak.application.usecase.product.findAll.FindAllProductUseCaseStrategy;
+import com.egon.spring_keycloak.application.usecase.product.findAll.impl.FindAllProductDefaultUseCaseStrategyImpl;
 import com.egon.spring_keycloak.application.selector.BaseUseCaseStrategySelector;
 import org.springframework.stereotype.Component;
 
