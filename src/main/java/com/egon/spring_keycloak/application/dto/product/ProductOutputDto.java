@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-public class FindProductOutputDto {
+public class ProductOutputDto {
   String id;
   String name;
   BigDecimal price;
 
-  public static FindProductOutputDto create() {
-    return new FindProductOutputDto("1", "Product 1", BigDecimal.valueOf(19.97));
+  public static ProductOutputDto create() {
+    return new ProductOutputDto("1", "Product 1", BigDecimal.valueOf(19.97));
   }
 }

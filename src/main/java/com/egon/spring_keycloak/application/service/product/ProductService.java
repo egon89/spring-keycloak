@@ -1,11 +1,10 @@
 package com.egon.spring_keycloak.application.service.product;
 
-import com.egon.spring_keycloak.application.dto.product.FindProductOutputDto;
+import com.egon.spring_keycloak.application.dto.product.FindAllProductOutputDto;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public interface ProductService {
-  List<FindProductOutputDto> find();
+  FindAllProductOutputDto findAll();
   String create(BigDecimal value);
 }
