@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CreateProductAdminUseCaseStrategyImpl implements CreateProductUseCaseStrategy {
+public class CreateProductByAdminUseCaseStrategyImpl implements CreateProductUseCaseStrategy {
 
   private final SaveProductPort saveProductPort;
 
@@ -25,6 +25,6 @@ public class CreateProductAdminUseCaseStrategyImpl implements CreateProductUseCa
   }
 
   private Product toEntity(CreateProductInputDto input) {
-    return new Product(null, input.getName(), input.getPrice(), Boolean.FALSE);
+    return new Product(null, input.getName(), input.getPrice(), Boolean.TRUE);
   }
 }

@@ -8,15 +8,17 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class BaseUseCaseStrategySelector<T extends UserRoleBeanStrategy> {
+public abstract class BaseDefaultUseCaseStrategySelector<T extends UserRoleBeanStrategy> {
   private final UserRolePort userRolePort;
   private final List<T> strategies;
+
+  public abstract T getDefaultUseCase();
 
   public T getUseCaseStrategy() {
     return strategies.stream()
         .filter(strategy -> strategy.supports(getUser()))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("No strategy found"));
+        .orElse(getDefaultUseCase());
   }
 
   private UserDto getUser() {
